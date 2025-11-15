@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pagination Example</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        table, th, td { border: 1px solid black; padding: 8px; }
+        .pagination a {
+            padding: 6px 12px;
+            border: 1px solid #000;
+            text-decoration: none;
+            margin: 0 2px;
+        }
+        .active {
+            background: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<h2>User List (Pagination)</h2>
+
+<table>
+    <tr>
+        <th>ID</th><th>Name</th><th>Email</th>
+    </tr>
+
+    <% users.forEach(user => { %>
+        <tr>
+            <td><%= user.id %></td>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+        </tr>
+    <% }) %>
+</table>
+
+<div class="pagination">
+
+    <% if (currentPage > 1) { %>
+        <a href="/users?page=<%= currentPage - 1 %>">Previous</a>
+    <% } %>
+
+    <% for (let p = 1; p <= totalPages; p++) { %>
+        <a href="/users?page=<%= p %>" class="<%= p === currentPage ? 'active' : '' %>">
+            <%= p %>
+        </a>
+    <% } %>
+
+    <% if (currentPage < totalPages) { %>
+        <a href="/users?page=<%= currentPage + 1 %>">Next</a>
+    <% } %>
+
+</div>
+
+</body>
+</html>
